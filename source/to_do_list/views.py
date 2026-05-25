@@ -21,3 +21,11 @@ def add(request):
                 due_date=request.POST.get('due_date') or None,
             )
             return HttpResponseRedirect("/tasks")
+
+def delete(request):
+    id = request.GET.get('id')
+
+    if id:
+        task = Task.objects.get(id=int(id))
+        task.delete()
+        return HttpResponseRedirect("/tasks")

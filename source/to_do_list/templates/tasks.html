@@ -37,13 +37,13 @@
                     <div class="card-header d-flex justify-content-between">
                         <span class="card-title">Статус: {% if task.status %}{{ task.get_status_display }}
                         {% else %}---{% endif %}</span>
-{#                        <span>{{ task.due_date| date:'Y-m-d' }}</span>#}
                     </div>
                     <div class="card-body text-secondary d-flex flex-column">
                         <p class="card-text">
                             {% if task.content %}{{ task.content|truncatewords:5 }}{% else %}---{% endif %}</p>
                         <span>Дата: {% if task.due_date %}{{ task.due_date| date:'Y-m-d' }}{% else %}---{% endif %}</span>
                     </div>
+                    <a class="btn btn-sm btn-outline-primary fs-5 px-3 lh-lg" href="/tasks/delete/?id={{ task.id }}">Удалить задачу</a>
                 </div>
             </div>
         {% empty %}
