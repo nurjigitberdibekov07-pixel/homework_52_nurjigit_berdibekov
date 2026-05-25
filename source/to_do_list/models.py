@@ -15,6 +15,8 @@ class Task(models.Model):
 
     due_date = models.DateField(null=True, blank=True, verbose_name="Дата выполнения")
 
+    def __str__(self):
+        return self.content
 
     class Meta:
         db_table = "Задача"

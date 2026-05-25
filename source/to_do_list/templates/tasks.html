@@ -35,7 +35,6 @@
             <div class="col">
                 <div class="card border-secondary h-100 mb-3">
                     <div class="card-header d-flex justify-content-between">
-{#                        <h5 class="card-title">{{ task.status }}</h5>#}
                         <span class="card-title">Статус: {% if task.status %}{{ task.get_status_display }}
                         {% else %}---{% endif %}</span>
 {#                        <span>{{ task.due_date| date:'Y-m-d' }}</span>#}
