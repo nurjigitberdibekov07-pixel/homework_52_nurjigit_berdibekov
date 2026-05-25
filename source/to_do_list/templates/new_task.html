@@ -34,16 +34,23 @@
             <form id="article-form" action="" method="POST">
                 {% csrf_token %}
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="status" name="status" placeholder="Статус">
-                    <label for="title">Статус</label>
+                    <select class="form-select" id="status" name="status">
+                        {% for value, label in status_choices %}
+                            <option value="{{ value }}" {% if value == 'new' %}selected{% endif %}>
+                                {{ label }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <label for="status">Статус</label>
                 </div>
+
                 <div class="form-floating mb-3">
                     <textarea type="text" class="form-control" id="content" name="content" placeholder="Описание"
                               style="height: 100px"></textarea>
                     <label for="content">Описание</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" name="due_date" placeholder="2025-12-19">
+                    <input type="text" class="form-control" name="due_date" id="due_date" placeholder="2025-12-19">
                     <label for="author">Дата</label>
                 </div>
             </form>

@@ -42,7 +42,7 @@
                     <div class="card-body text-secondary d-flex flex-column">
                         <p class="card-text">
                             {% if task.content %}{{ task.content|truncatewords:5 }}{% else %}---{% endif %}</p>
-                        <span>Дата: {% if task.due_date %}{{ task.due_date }}{% else %}---{% endif %}</span>
+                        <span>Дата: {% if task.due_date %}{{ task.due_date| date:'Y-m-d' }}{% else %}---{% endif %}</span>
                     </div>
                 </div>
             </div>

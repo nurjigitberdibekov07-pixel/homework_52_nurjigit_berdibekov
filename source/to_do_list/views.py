@@ -11,11 +11,12 @@ def tasks(request):
     return render(request, "tasks.html", context)
 
 def add(request):
-        if request.method == 'GET':
-            return render(request, 'new_task.html')
-        elif request.method == 'POST':
+    if request.method == 'GET':
+        return render(request, 'new_task.html', {
+            'status_choices': Task.STATUS_CHOICES })
+    elif request.method == 'POST':
             Task.objects.create(
-                description=request.POST.get('description'),
+                content=request.POST.get('content'),
                 status=request.POST.get('status', 'new'),
                 due_date=request.POST.get('due_date') or None,
             )
