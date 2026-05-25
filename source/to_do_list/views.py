@@ -15,12 +15,19 @@ def add(request):
         return render(request, 'new_task.html', {
             'status_choices': Task.STATUS_CHOICES })
     elif request.method == 'POST':
-            Task.objects.create(
-                content=request.POST.get('content'),
-                status=request.POST.get('status', 'new'),
-                due_date=request.POST.get('due_date') or None,
-            )
-            return HttpResponseRedirect("/tasks")
+        content = request.POST.get('content', '').strip()
+        if not content:
+            return render(request, 'new_task.html', {
+                'status_choices': Task.STATUS_CHOICES,
+                'error': 'Описание не может быть пустым'
+            })
+
+        Task.objects.create(
+            content=content,
+            status=request.POST.get('status', 'new').strip(),
+            due_date=request.POST.get('due_date', '').strip() or None,)
+        return HttpResponseRedirect("/tasks")
+
 
 def delete(request):
     id = request.GET.get('id')

@@ -55,6 +55,9 @@
                 </div>
             </form>
         </div>
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
         <div class="card-footer text-end py-3">
             <button type="submit" form="article-form" class="btn btn-sm btn-primary">Сохранить</button>
         </div>
