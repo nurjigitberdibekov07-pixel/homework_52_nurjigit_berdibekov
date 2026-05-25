@@ -19,30 +19,31 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="/articles/">Все статьи</a>
+                <a class="nav-link active" aria-current="page" href="/tasks/">Все задачи</a>
             </div>
         </div>
     </div>
 </nav>
-<div class="container">
-    <div class="border rounded-3 my-4 d-flex justify-content-between p-3">
-        <h1>Статьи</h1>
-        <a class="btn btn-sm btn-outline-primary fs-5 px-3 lh-lg" href="/articles/add/">Добавить статью</a>
+<div class="content" style="padding: 20px">
+
+        <div class="border rounded-3 my-4 d-flex justify-content-between p-3">
+        <h1>Задачи</h1>
+        <a class="btn btn-sm btn-outline-primary fs-5 px-3 lh-lg" href="/tasks/add/">Добавить задачу</a>
     </div>
     <div class="row row-cols-md-3 g-4">
-        {% for article in articles %}
+        {% for task in tasks %}
             <div class="col">
                 <div class="card border-secondary h-100 mb-3">
                     <div class="card-header d-flex justify-content-between">
-                        <h5 class="card-title">{{ article.title }}</h5>
-                        <span>{{ article.created_at| date:'Y-m-d' }}</span>
+                        <span class="card-title">Статус: {% if task.status %}{{ task.get_status_display }}
+                        {% else %}---{% endif %}</span>
                     </div>
                     <div class="card-body text-secondary d-flex flex-column">
                         <p class="card-text">
-                            {% if article.content %}{{ article.content|truncatewords:5 }}{% else %}---{% endif %}</p>
-                        <span>Автор: {% if article.author %}{{ article.author }}{% else %}---{% endif %}</span>
-                        <a href="/article/?id={{ article.id }}" class="card-link mt-auto ms-auto">Подробнее</a>
+                            {% if task.content %}{{ task.content|truncatewords:5 }}{% else %}---{% endif %}</p>
+                        <span>Дата: {% if task.due_date %}{{ task.due_date| date:'Y-m-d' }}{% else %}---{% endif %}</span>
                     </div>
+                    <a class="btn btn-sm btn-outline-primary fs-5 px-3 lh-lg" href="/tasks/delete/?id={{ task.id }}">Удалить задачу</a>
                 </div>
             </div>
         {% empty %}

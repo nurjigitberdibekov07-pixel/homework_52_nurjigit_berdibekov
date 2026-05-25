@@ -29,16 +29,37 @@
 </nav>
 <div class="container">
     <div class="card my-5">
-        <div class="card-header fs-4 text-center">{{ article.title }}</div>
+        <div class="card-header fs-4 text-center py-3">Добавление задачи</div>
         <div class="card-body">
-            <figure>
-                <blockquote class="blockquote">
-                    <p>{{ article.content }}</p>
-                </blockquote>
-                <figcaption class="blockquote-footer mt-3">
-                    {{ article.author }}
-                </figcaption>
-            </figure>
+            <form id="article-form" action="" method="POST">
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="status" name="status">
+                        {% for value, label in status_choices %}
+                            <option value="{{ value }}" {% if value == 'new' %}selected{% endif %}>
+                                {{ label }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <label for="status">Статус</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <textarea type="text" class="form-control" id="content" name="content" placeholder="Описание"
+                              style="height: 100px"></textarea>
+                    <label for="content">Описание</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="due_date" id="due_date" placeholder="2025-12-19">
+                    <label for="author">Дата</label>
+                </div>
+            </form>
+        </div>
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <div class="card-footer text-end py-3">
+            <button type="submit" form="article-form" class="btn btn-sm btn-primary">Сохранить</button>
         </div>
     </div>
 </div>
